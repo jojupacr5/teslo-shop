@@ -10,7 +10,10 @@ export default function ShopLayout({
 
       <TopMenu />
 
-      {children}
+      <div className="px-0 md:px-10">
+        {children}
+      </div>
+
     </main>
   );
 }
