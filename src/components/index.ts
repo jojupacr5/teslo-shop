@@ -14,3 +14,6 @@ export * from "./product/size-selector/SizeSelector";
 export * from "./product/quantity-selector/QuantitySelector";
 export * from "./product/slideshow/ProductsSlideshow";
 export * from "./product/slideshow/ProductsMobileSlideshow";
+
+// Footer
+export * from "./ui/footer/Footer";
