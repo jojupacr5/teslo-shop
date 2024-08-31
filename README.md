@@ -32,6 +32,8 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 5. Run Prisma migrations `npx prisma migrate dev`
 
-6. Run project in development `npm run dev`
+6. Execute seed `npm run seed`
+
+7. Run project in development `npm run dev`
 
 ## Working on Production
