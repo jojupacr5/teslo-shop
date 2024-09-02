@@ -5,12 +5,40 @@ import { notFound } from "next/navigation";
 import { ProductsMobileSlideshow, ProductsSlideshow, QuantitySelector, SizeSelector, StockLabel } from "@/components";
 import { titleFont } from "@/config/fonts";
 import { getProductBySlug } from "@/actions";
+import { Metadata, ResolvingMetadata } from "next";
+import { AddToCart } from "./ui/AddToCart";
 
 interface Props {
   params: {
     slug: string;
   }
 }
+
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // read route params
+  const slug = params.slug
+ 
+  // fetch data
+  const product = await getProductBySlug(slug)
+ 
+  // optionally access and extend (rather than replace) parent metadata
+  // const previousImages = (await parent).openGraph?.images || []
+ 
+  return {
+    title: product?.title ?? '',
+    description: product?.description ?? '',
+    openGraph: {
+      title: product?.title ?? '',
+      description: product?.description ?? '',
+      images: [`/products/${product?.images[1]}`],
+    },
+  }
+}
+
 
 export default async function ProductPage({ params }: Props) {
 
@@ -56,20 +84,7 @@ export default async function ProductPage({ params }: Props) {
           ${ product.price}
         </p>
 
-        {/* Selector de tallas */}
-        <SizeSelector 
-          selectedSize={ product.sizes[0] }
-          availableSized={ product.sizes }
-        />
-
-        {/* Selector de cantidad */}
-        <QuantitySelector
-          quantity={2}
-        />
-
-        <button className="btn-primary my-5">
-          Agregar al carrito
-        </button>
+        <AddToCart product={ product } />
 
         <h3 className="font-bold text-sm">
           Descripción
