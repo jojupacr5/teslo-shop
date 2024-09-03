@@ -28,12 +28,14 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 3. Install dependencies `npm install`
 
-4. Raise the database `docker compose up -d`
+4. Run `npx auth secret` to create an `.env.locl` file needed for authJs
 
-5. Run Prisma migrations `npx prisma migrate dev`
+5. Raise the database `docker compose up -d`
 
-6. Execute seed `npm run seed`
+6. Run Prisma migrations `npx prisma migrate dev`
 
-7. Run project in development `npm run dev`
+7. Execute seed `npm run seed`
+
+8. Run project in development `npm run dev`
 
 ## Working on Production
