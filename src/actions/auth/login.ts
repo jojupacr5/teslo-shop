@@ -11,17 +11,16 @@ export async function authenticate(
 ) {
   try {
     // await sleep(2);
-    await signIn("credentials", formData);
+    await signIn("credentials", {
+      ...Object.fromEntries(formData),
+      redirect: false,
+    });
+
+    return "Success";
   } catch (error) {
-    return "CredentialsSignin";
-    // if (error instanceof AuthError) {
-    //   switch (error.type) {
-    //     case "CredentialsSignin":
-    //       return "Invalid credentials.";
-    //     default:
-    //       return "Something went wrong.";
-    //   }
-    // }
-    // throw error;
+    if ((error as any).type === "CredentialsSignin") {
+      return "CredentialsSignin";
+    }
+    return "Unknown error";
   }
 }
