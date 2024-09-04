@@ -4,6 +4,7 @@ import { IoCloseOutline, IoLogInOutline, IoLogOutOutline, IoPeopleOutline, IoPer
 
 import { useUIStore } from "@/store"
 import clsx from "clsx"
+import { logout } from "@/actions"
 
 export const Sidebar = () => {
 
@@ -61,7 +62,8 @@ export const Sidebar = () => {
 
         {/* Menu */}
         <Link 
-          href="/"
+          href="/profile"
+          onClick={ () => closeMenu() }
           className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all" 
         >
           <IoPersonOutline size={30} />
@@ -81,13 +83,13 @@ export const Sidebar = () => {
           <IoLogInOutline size={30} />
           <span className="ml-3 text-xl">Ingresar</span>
         </Link>
-        <Link 
-          href="/"
-          className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all" 
+        <button 
+          onClick={() => logout()}
+          className="w-full flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all" 
         >
           <IoLogOutOutline size={30} />
           <span className="ml-3 text-xl">Salir</span>
-        </Link>
+        </button>
 
         {/* Divider */}
         <div className="w-full h-px bg-gray-200 my-10"></div>
