@@ -5,11 +5,15 @@ import { IoCloseOutline, IoLogInOutline, IoLogOutOutline, IoPeopleOutline, IoPer
 import { useUIStore } from "@/store"
 import clsx from "clsx"
 import { logout } from "@/actions"
+import { useSession } from "next-auth/react"
 
 export const Sidebar = () => {
 
   const isSideMenuOpen = useUIStore( state => state.isSideMenuOpen);
   const closeMenu = useUIStore( state => state.closeSideMenu);
+
+  const { data: session } = useSession();
+  const isAuthenticated = !!session?.user;
 
   return (
     <div>
@@ -76,21 +80,31 @@ export const Sidebar = () => {
           <IoTicketOutline size={30} />
           <span className="ml-3 text-xl">Ordenes</span>
         </Link>
-        <Link 
-          href="/auth/login"
-          onClick={ () => closeMenu() }
-          className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all" 
-        >
-          <IoLogInOutline size={30} />
-          <span className="ml-3 text-xl">Ingresar</span>
-        </Link>
-        <button 
-          onClick={() => logout()}
-          className="w-full flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all" 
-        >
-          <IoLogOutOutline size={30} />
-          <span className="ml-3 text-xl">Salir</span>
-        </button>
+
+        {
+          isAuthenticated && (
+            <button 
+              onClick={() => logout()}
+              className="w-full flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all" 
+            >
+              <IoLogOutOutline size={30} />
+              <span className="ml-3 text-xl">Salir</span>
+            </button>
+          )
+        }
+
+        {
+          !isAuthenticated && (
+            <Link 
+              href="/auth/login"
+              onClick={ () => closeMenu() }
+              className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all" 
+            >
+              <IoLogInOutline size={30} />
+              <span className="ml-3 text-xl">Ingresar</span>
+            </Link>
+          )
+        }        
 
         {/* Divider */}
         <div className="w-full h-px bg-gray-200 my-10"></div>

@@ -19,3 +19,6 @@ export * from "./product/stock-label/StockLabel";
 // Footer
 export * from "./ui/footer/Footer";
 export * from "./ui/pagination/Pagination";
+
+//Provider
+export * from "./provider/Provider";
