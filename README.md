@@ -30,7 +30,7 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 4. Run `npx auth secret` to create an `.env.locl` file needed for authJs
 
-5. Raise the database `docker compose up -d`
+5. Raise the database `docker compose up -d` Remember, docker desktop must be opened before using this command
 
 6. Run Prisma migrations `npx prisma migrate dev`
 
